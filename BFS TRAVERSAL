@@ -1,0 +1,68 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+
+   const int maxnodes = 5;
+    int Matrix[5][5];
+    bool visited[maxnodes];
+    int numnodes = 5;
+
+    void  Graph() {
+        for (int i = 0; i < maxnodes; i++) {
+            for (int j = 0; j < maxnodes; j++) {
+                Matrix[i][j] = 0;
+            }
+        }
+    }
+    void BFS(int startNode) {
+        int size = 5;
+        queue<int>q;
+       q.push(startNode);
+        visited[startNode] = true;
+
+        while (!q.empty()) {
+            int currentNode = q.front();
+           q.pop();
+
+            cout << currentNode << " ";
+
+            for (int i = 0; i < numnodes; i++) {
+                if (Matrix[currentNode][i] == 1 && !visited[i]) {
+                    q.push(i);
+                    visited[i] = true;
+                }
+
+            }
+        }
+    }
+
+    void addEdge(int from, int to) {
+        Matrix[from][to] = 1;
+        Matrix[to][from] = 1;
+    }
+    void displayGraph() {
+        for (int i = 0; i < numnodes; i++) {
+            for (int j = 0; j < numnodes; j++) {
+                cout << Matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    int main() {
+        
+        addEdge(0, 1);
+        addEdge(1, 0);
+        addEdge(1, 3);
+        addEdge(3, 1);
+        addEdge(2, 4);
+        addEdge(3, 4);
+        addEdge(4, 2);
+        addEdge(4, 3);
+        int startnode;
+        cout << " ENTER THE THE ELEMENT OF GRAPH TO START: ";
+        cin >> startnode;
+        BFS(startnode);
+        cout << endl;
+       
+}
